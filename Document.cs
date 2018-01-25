@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,38 +13,48 @@ namespace WindowsFormsApp2
 {
     public partial class Document : Form
     {
-        public Document() //Инициализация компонента
+
+        public Document()
         {
-            InitializeComponent();
+            InitializeComponent(); //
+
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-/*работа по изменению текста и вывод его в окно. стандартный текст функции без ввода изменений
-и дополнительных переменных*/
+
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            MainForm F1 = (MainForm)Owner;
+
+        
+            MainForm F1 = (MainForm)Owner; // создается экземпляр формы
+			/*выполняется проверка на пустые поля*/
             if (Names.Text == "" || Year.Text == "" ||
                 Pages.Text == "" || Publisher.Text == "")
             {
-                DialogResult Miss;
+                DialogResult Miss; // выводится сообщение о незаполненных полях
+
                 Miss = MessageBox.Show("Заполните все обязательные поля");
             }
             else
             {
-                if (Author.Text != "")
+
+                if (Author.Text != "") // проверка поля Автор на заполненность
                 {
+					/*не пустой*/
                     string[] author = Author.Text.Split(';');
+					 // добавление исчотника с список
                     F1.AddingToList(new DocumentL(Names.Text, Convert.ToInt32(Year.Text),
-                    Publisher.Text, Pages.Text, author, GOST.Text));
+						Publisher.Text, Pages.Text, author, GOST.Text));
+
                     F1.SortButton_Click(sender, e);
                     Close();
                 }
                 else
                 {
+
                     F1.AddingToList(new DocumentL(Names.Text, Convert.ToInt32(Year.Text),
                     Publisher.Text, Pages.Text, null, GOST.Text));
                     F1.SortButton_Click(sender, e);
